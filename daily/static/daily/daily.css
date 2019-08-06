@@ -1,0 +1,196 @@
+HTML, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    color: white;
+    background-color: #282c34;
+
+}
+
+#root {
+    width: 100%;
+    height: 100%;
+    background-color: #282C34;
+
+}
+
+header {
+    background-color: #20232A;
+}
+
+header #logo {
+    text-align: center;
+
+}
+
+header #logo h1 {
+    margin: 0;
+    padding: .3em 0;
+
+}
+
+header #logo p {
+    margin: 0;
+}
+
+
+header ul {
+    margin: 0;
+    padding: 0;
+    text-align: end;
+    list-style: none;
+    font-size: 20px;
+    padding-bottom: 10px;
+
+}
+
+header ul li {
+    cursor: pointer;
+    display: inline;
+    margin: 0;
+    margin-right: 2em;
+}
+
+header ul li span {
+    cursor: pointer;
+}
+
+header ul li:hover {
+    color: #228f8f;
+}
+
+
+header ul a {
+    text-decoration: none;
+    color: white;
+}
+
+header ul li ul {
+    text-align: center;
+    position: absolute;
+    display: none;
+    top: 25px;
+    right: -70px;
+    padding: 1em;
+    padding-bottom: 0;
+    background-color: #20232A;
+    font-family: sans-serif;
+
+}
+
+header ul li ul li {
+    display: block;
+    margin: 0;
+    width: 200px;
+    height: 40px;
+}
+
+header ul li:hover ul {
+    display: block;
+}
+
+main {
+    font-family: sans-serif;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+
+}
+
+main p {
+    margin: 0 10em;
+    padding-top: 5em;
+    font-size: 26px;
+}
+
+main div {
+    margin: 5em;
+}
+
+main div a {
+    text-decoration: none;
+    background-color: #228f8f;
+    color: black;
+    font-size: 20px;
+    padding: 1em;
+}
+
+main div a:hover {
+    transition: .5s;
+    background-color: white;
+}
+
+
+.About {
+    width: 100%;
+    height: 100%;
+    font-family: sans-serif;
+}
+
+.About .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 1fr;
+    grid-gap: 1em;
+    text-align: justify;
+}
+
+.About article {
+    margin: 0;
+}
+
+.About article div {
+    margin: 1em;
+    margin-top: 2em;
+    padding: 1.5em;
+    padding-top: 0;
+    background-color: #404040;
+}
+
+.About article div a {
+    color: black;
+}
+
+.About .fisrt-article {
+    padding-left: 2em;
+}
+
+.About .last-article {
+    padding-right: 2em;
+}
+
+.About h1 {
+    margin: 0;
+    padding-top: .5em;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 40px;
+    text-align: center;
+}
+
+.Login {
+    width: 100%;
+    height: 100%;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+.Login form {
+    margin-top: 4em;
+    display: inline-block;
+    width: 600px;
+    height: 300px;
+    background-color: #191b20;
+}
+
+.Login form label {
+    display: block;
+    margin-top: 1em;
+    font-size: 20px;
+}
+
+.Login form label:first {
+    margin-top: 0;
+}
+
+
