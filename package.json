@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development ./BancoDeDados1/static/src/index.js --output ./BancoDeDados1/static/BancoDeDados1/main.js; webpack --mode development --watch ./daily/static/src/index.js --output ./daily/static/daily/main.js",
+    "dev-daily": "webpack --mode development --watch ./daily/static/src/index.js --output ./daily/static/daily/main.js",
+    "dev-webTemplate": "webpack --mode development --watch ./webTemplate/static/src/index.js --output ./webTemplate/static/webTemplate/main.js",
     "build": "webpack --mode production ./BancoDeDados1/static/src/index.js --output ./BancoDeDados1/static/BancoDeDados1/main.js"
   },
   "keywords": [],
