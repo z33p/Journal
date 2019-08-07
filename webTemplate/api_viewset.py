@@ -35,18 +35,3 @@ class ParagraphViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = serializers.ParagraphSerializer
-
-
-# Journal = namedtuple('Journal', ('subjects', 'sections', 'articles', 'paragraphs'))
-#
-# class JournalViewSet(viewsets.ViewSet):
-#     def list(self, request):
-#         journal = Journal (
-#             subjects = Subject.objects.all(),
-#             sections = Section.objects.all(),
-#             articles = Article.objects.all(),
-#             paragraphs = Paragraph.objects.all()
-#         )
-#
-#         serializer = JournalSerializer(journal)
-#         return Response(serializer.data)

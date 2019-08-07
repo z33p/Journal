@@ -30,10 +30,3 @@ class ParagraphSerializer(serializers.ModelSerializer):
     class Meta:
         model = Paragraph
         fields = '__all__'
-
-
-# class JournalSerializer(serializers.Serializer):
-#     subjects = SubjectSerializer(many=True)
-#     sections = SectionSerializer(many=True)
-#     articles = ArticleSerializer(many=True)
-#     paragraphs = ParagraphSerializer(many=True)

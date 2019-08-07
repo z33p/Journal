@@ -40,7 +40,6 @@ INSTALLED_APPS = [
 
     # My apps
     'daily',
-    'BancoDeDados1',
     'webTemplate',
 
     # Third apps

@@ -6,7 +6,7 @@ import os
 
 # Create your views here.
 def listJournalView(request, subject_name,*args, **kwargs):
-    template_name = 'webTemplate/index.json'
+    template_name = 'webTemplate/response.json'
     subject = models.Subject.objects.filter(title=subject_name)[0]
     journal = (subject.title, [])
     # print("Subject: ", subject)
