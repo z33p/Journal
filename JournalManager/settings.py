@@ -40,8 +40,8 @@ INSTALLED_APPS = [
 
     # My apps
     'daily',
-    'webTemplate',
-
+    'simpleReactEngine',
+    
     # Third apps
     'rest_framework',
 ]
