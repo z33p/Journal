@@ -23,5 +23,4 @@ urlpatterns = [
     path('', include('webTemplate.api_urls')),
     path('webTemplate/', include('webTemplate.urls')),
     # path('api-auth/', include('rest_framework.urls')),
-    path('BancoDeDados1/', include('BancoDeDados1.urls')),
 ]
