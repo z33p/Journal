@@ -20,7 +20,6 @@ from django.urls import path, include
 urlpatterns = [
     path('', include('daily.urls')),
     path('admin/', admin.site.urls),
-    path('sre/', include("simpleReactEngine.urls"))
+    path('sre/', include('simpleReactEngine.urls')),
 
-    # path('api-auth/', include('rest_framework.urls')),
 ]

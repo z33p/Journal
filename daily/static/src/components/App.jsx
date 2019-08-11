@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import ReactDom from 'react-dom';
-import Main from './Main'
+import Main from './Main.jsx'
 
 
 
@@ -9,9 +9,9 @@ class App extends Component {
 
     render() {
         return (
-          
+
             <Main />
-          
+
          );
     }
 }
