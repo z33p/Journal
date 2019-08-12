@@ -52,7 +52,7 @@ main {
     color: black;
 }
 
-main aside {
+main nav {
     position: fixed;
     right: 0;
     height: 100%;
@@ -62,25 +62,25 @@ main aside {
     overflow: auto;
 }
 
-main aside h2 {
+main nav h2 {
     padding-top: 1em;
     margin: 0;
 
 }
 
-main aside li {
+main nav li {
     list-style: none;
     text-align: initial;
     font-size: 20px;
     padding: 5px;
 }
 
-main aside a {
+main nav a {
     text-decoration: none;
     color: black;
 }
 
-main aside a:hover {
+main nav a:hover {
     color: #00000080;
 }
 
@@ -119,4 +119,54 @@ main section article div {
 }
 main section article div img {
     display: inline-block;
+}
+
+main section footer {
+    background-color: #fff;
+    width: 100%;
+    text-align: center;
+}
+
+main section footer .panel-blocks {
+    width: 80%;
+    display: inline-block;
+
+    color: #333;
+    background-color: #eee;
+    margin-top: 2em;
+    padding: 2em 0;
+    padding-right: 2em;
+
+}
+
+main section footer .panel-article {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: 1fr 1fr;
+    grid-row-gap: .8em;
+}
+
+main section footer .panel-htmlSnippet {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-row-gap: .8em;
+}
+
+.panel-blocks h3 {
+    cursor: default;
+}
+
+.panel-blocks button {
+    color: #fff;
+    background-color: #337ab7;
+    margin: 2em 0;
+    font-weight: 400;
+    text-align: center;
+    touch-action: manipulation;
+    cursor: pointer;
+    border: none;    
+    padding: .6em 1.2em;
+    font-size: 14px;
+    border-radius: 4px;
 }

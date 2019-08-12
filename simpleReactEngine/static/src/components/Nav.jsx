@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-class Aside extends Component {
+class Nav extends Component {
     constructor(props) {
         super(props);
         // this.state = {}
@@ -20,14 +20,14 @@ class Aside extends Component {
 
     render() { 
         return ( 
-            <aside>
+            <nav>
                 <h2>Sumário</h2>
                 <ul>
                     { this.create_li() }
                 </ul>
-            </aside>
+            </nav>
         );
     }
 }
  
-export default Aside;
+export default Nav;

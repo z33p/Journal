@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import Articles from './Articles.jsx';
-import Aside from './Aside.jsx';
+import Nav from './Nav.jsx';
+import Panel from './Panel.jsx';
+
 
 
 class Main extends Component {
     constructor(props) {
         super(props);
-        // this.state = {}
+        this.state = {
+            articleNames: []
+        }
     }
 
     getArticleNames() {
@@ -26,9 +30,11 @@ class Main extends Component {
             <main>
                 <section>
                     <Articles article_set = { this.props.subject.article_set }/>
+                    <Panel articleNames = { this.getArticleNames() }/>
                 </section>
+                
+                <Nav articleNames = { this.getArticleNames() }/>
 
-                <Aside articleNames = { this.getArticleNames() }/>
             </main>
 
         );
