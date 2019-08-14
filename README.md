@@ -1,1 +1,3 @@
 # Journal
+
+* By: Raphael Fellipe *
