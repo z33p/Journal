@@ -8,32 +8,41 @@ import Panel from './Panel.jsx';
 class Main extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            articleNames: []
-        }
+
+
+        this.getArticles = this.getArticles.bind(this);
     }
 
-    getArticleNames() {
-        let articleNames = []
+    getArticles() {
+        let articleState = {
+            title: [],
+            id: []
+        }
+        
         this.props.subject.article_set.forEach(art => {
-            articleNames.push(art.title);
+            articleState.title.push(art.title);
+            articleState.id.push(art.id);
         });
 
-        return articleNames;
+        return articleState;
     }
 
     render() {
         if (this.props.subject.title === undefined)
            return null
-
+        
+        let articlesState = this.getArticles();
         return(
             <main>
                 <section>
                     <Articles article_set = { this.props.subject.article_set }/>
-                    <Panel articleNames = { this.getArticleNames() }/>
+                    <Panel
+                        articleNames = { articlesState.title }
+                        articleId =  { articlesState.id }
+                    />
                 </section>
                 
-                <Nav articleNames = { this.getArticleNames() }/>
+                <Nav articleNames = { articlesState.title }/>
 
             </main>
 

@@ -13,11 +13,25 @@ class Panel extends Component {
         }
     }
 
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.value // target.type === 'checkbox' ? target.checked : ;
+        const name = target.name;
+    
+        this.setState({
+          [name]: value
+        });
+    }
+
     render() {
         return (
             <footer>
                 <div className="panel-blocks">
-                    <ArticlePanel articlePanelOn = { this.state.articlePanelOn }/>
+                    <ArticlePanel
+                        articlePanelOn = { this.state.articlePanelOn }
+                        onChange = { this.handleInputChange }
+                        csrftoken = { getCookie('csrftoken') }
+                    />
                     <DisplayControl
                         objState = { this.state.articlePanelOn }
                         display_on = { () => { this.setState({ articlePanelOn: true }); } }
@@ -31,8 +45,12 @@ class Panel extends Component {
                 
                 <div className="panel-blocks">
                     <HtmlSnippetPanel
-                        htmlSnippetPanelOn = { this.state.htmlSnippetPanelOn } 
+                        htmlSnippetPanelOn = { this.state.htmlSnippetPanelOn }
+                        onChange = { this.handleInputChange }
                         articleNames = { this.props.articleNames }
+                        articleId = { this.props.articleId }
+                        csrftoken = { getCookie('csrftoken') }
+
                     />
                     
                     <DisplayControl
@@ -47,6 +65,22 @@ class Panel extends Component {
             </footer>
          );
     }
+}
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }
  
 export default Panel;

@@ -130,31 +130,21 @@ main section footer {
 main section footer .panel-blocks {
     width: 80%;
     display: inline-block;
+    padding-top: 1.5em;
+    padding-right: 2em;
+    margin: 2em;
 
     color: #333;
     background-color: #eee;
-    margin-top: 2em;
-    padding: 2em 0;
-    padding-right: 2em;
 
 }
 
-main section footer .panel-article {
-    display: grid;
-    grid-template-columns: 1fr 5fr;
-    grid-template-rows: 1fr 1fr;
-    grid-row-gap: .8em;
-}
-
-main section footer .panel-htmlSnippet {
+section footer .separator{
     display: grid;
     grid-template-columns: 1fr 4fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-row-gap: .8em;
-}
+    grid-template-rows: 1fr;
+    padding-top: 1em;
 
-.panel-blocks h3 {
-    cursor: default;
 }
 
 .panel-blocks button {
@@ -163,7 +153,6 @@ main section footer .panel-htmlSnippet {
     margin: 2em 0;
     font-weight: 400;
     text-align: center;
-    touch-action: manipulation;
     cursor: pointer;
     border: none;    
     padding: .6em 1.2em;
