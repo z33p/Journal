@@ -63,7 +63,7 @@ main nav {
 }
 
 main nav h2 {
-    padding-top: 1em;
+    padding: 1em 0;
     margin: 0;
 
 }
@@ -73,6 +73,7 @@ main nav li {
     text-align: initial;
     font-size: 20px;
     padding: 5px;
+    margin-left: 20px;
 }
 
 main nav a {
@@ -84,23 +85,23 @@ main nav a:hover {
     color: #00000080;
 }
 
-main section {
+section {
     background-color: #fff;
 }
 
-main section article h3 {
+section article h3 {
     padding-top: 1.2em;
     padding-left: 2em;
 }
 
-main section article h2 {
+section article h2 {
     padding-top: 1.2em;
     padding-left: 2em;
     margin: .5em;
     font-size: 32px;
 }
 
-main section article p {
+section article p {
     margin: 0 3em;
 
     font-weight: 400;
@@ -110,40 +111,41 @@ main section article p {
     text-align: justify;
 }
 
-main section article p span {
+section article p span {
     display: block;
 }
 
-main section article div {
+section article div {
     text-align: center;
 }
-main section article div img {
+section article div img {
     display: inline-block;
 }
 
-main section footer {
+.Panel {
     background-color: #fff;
     width: 100%;
     text-align: center;
 }
 
-main section footer .panel-blocks {
+.Panel .panel-blocks {
     width: 80%;
     display: inline-block;
     padding-top: 1.5em;
-    padding-right: 2em;
     margin: 2em;
 
     color: #333;
-    background-color: #eee;
+    background-color: #ddd;
 
 }
 
-section footer .separator{
+.panel-blocks .separator{
     display: grid;
     grid-template-columns: 1fr 4fr;
     grid-template-rows: 1fr;
     padding-top: 1em;
+    padding-right: 2em;
+
 
 }
 
@@ -158,4 +160,10 @@ section footer .separator{
     padding: .6em 1.2em;
     font-size: 14px;
     border-radius: 4px;
+}
+
+.panel-blocks .hidePanel {
+    width: 100%;
+    margin: 0;
+    background-color: #aaa;
 }

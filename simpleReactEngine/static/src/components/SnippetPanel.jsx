@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import TitleOrContent from './TitleOrContent.jsx';
 
 
 class HtmlSnippetPanel extends Component {
@@ -15,36 +16,11 @@ class HtmlSnippetPanel extends Component {
         this.createSnnipet =  this.createSnnipet.bind(this);
     }
 
-    TitleOrContent() {
-        if (this.state.htmlTag === "p")
-            return (
-                <>
-                <h3>Content</h3>
-                <textarea
-                    rows = "10"
-                    name = "snippetContent"
-                    onChange = { this.props.onChange.bind(this) }
-                ></textarea>
-                </>
-            );
-        
-        else return (
-                <>
-                <h3>Title</h3>
-                <input
-                    name = "snippetTitle"
-                    type = "text"
-                    onChange = { this.props.onChange.bind(this) }
-                ></input>
-                </>
-            );
-    }
-
     render() {
         if (this.props.htmlSnippetPanelOn) {
             return (
                 <div className="panel-htmlSnippet">
-
+                    <h2>Snippet Panel</h2>
                     <div className = "separator">
                         <h3>Article</h3>
                         <select
@@ -71,7 +47,10 @@ class HtmlSnippetPanel extends Component {
                     </div>
     
                     <div className = "separator">
-                        { this.TitleOrContent() }
+                        <TitleOrContent
+                            htmlTag = { this.state.htmlTag }
+                            onChange = { this.props.onChange.bind(this) }
+                        />
                     </div>
     
                     <button onClick = { this.createSnnipet }>Send</button>
@@ -97,8 +76,6 @@ class HtmlSnippetPanel extends Component {
         return options;
     }
 
-
-
     createSnnipet() {
         let newSnippet = {
             "title": this.state.snippetTitle,
@@ -117,13 +94,13 @@ class HtmlSnippetPanel extends Component {
                 body: JSON.stringify(newSnippet)
             })
             .then((res) => res.json())
-            .then((data) => console.log(data))
+            .then((data) => {
+                this.props.pushSnippet(data);
+                
+            })
             .catch((err) => console.log(err))
     }
-
-    
 }
 
 
- 
 export default HtmlSnippetPanel;

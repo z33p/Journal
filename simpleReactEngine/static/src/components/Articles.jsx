@@ -48,7 +48,7 @@ class Articles extends Component {
 
     render() { 
         return (
-            <div>
+            <div className="articles">
                 {this.createArticles() }
             </div>
         );

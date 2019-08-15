@@ -10,8 +10,44 @@ class ArticlePanel extends Component {
         }
 
         this.createArticle = this.createArticle.bind(this);
-    
     }
+
+    render() {
+        if (this.props.articlePanelOn)
+            return (
+                <div className="panel-article">
+                    <h2>Article Panel</h2>
+                    <div className = "separator">
+                        <h3>Title</h3>
+                        <input
+                            type = "text"
+                            name = "articleTitle"
+                            value = { this.state.value }
+                            required = { true }
+                            onChange = { this.props.onChange.bind(this) }
+                        ></input>
+                    </div>
+                    
+                    <div className = "separator">
+                        <h3>Description</h3>
+                        <textarea
+                            rows = "10"
+                            name = "articleDescription"
+                            value = { this.state.description }
+                            onChange = { this.props.onChange.bind(this) }
+                        ></textarea>
+                    </div>
+                    
+                    
+                    <button
+                        onClick={ this.createArticle }
+                        type="submit"
+                    >Send</button>
+                </div>
+            );
+        
+        return <p>Adicionar um novo artigo</p>
+        }
 
     createArticle() {
         const username = document.getElementById("username").innerHTML;
@@ -26,6 +62,7 @@ class ArticlePanel extends Component {
                 description: this.state.articleDescription,
                 subject: id
             }
+
             fetch("http://localhost:8000/sre/api/article/", {
                 method: "POST",
                 headers: new Headers({
@@ -36,46 +73,12 @@ class ArticlePanel extends Component {
                 body: JSON.stringify(newArticle)
             })
             .then((res) => res.json())
-            .then((data) => console.log(data))
-            .catch((err) => console.log(err))
+            .then((data) => {
+                this.props.pushArticle(data);
+                
+            })
+            .catch((err) => console.log("Err: " + err))
         });
-    }
-    
-
-    render() {
-    if (this.props.articlePanelOn)
-        return (
-            <div className="panel-article">
-                <div className = "separator">
-                    <h3>Title</h3>
-                    <input
-                        type = "text"
-                        name = "articleTitle"
-                        value = { this.state.value }
-                        required = { true }
-                        onChange = { this.props.onChange.bind(this) }
-                    ></input>
-                </div>
-                
-                <div className = "separator">
-                    <h3>Description</h3>
-                    <textarea
-                        rows = "10"
-                        name = "articleDescription"
-                        value = { this.state.description }
-                        onChange = { this.props.onChange.bind(this) }
-                    ></textarea>
-                </div>
-                
-                
-                <button
-                    onClick={ this.createArticle }
-                    type="submit"
-                >Send</button>
-            </div>
-        );
-    
-    return <p>Adicionar um novo artigo</p>
     }
 }
 

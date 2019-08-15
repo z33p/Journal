@@ -100,9 +100,9 @@ main {
 }
 
 main p {
-    margin: 10% 30%;
+    margin: 10% 20%;
 
-    font-size: 26px;
+    font-size: 2em;
 }
 
 main div {

@@ -4,13 +4,18 @@ import Nav from './Nav.jsx';
 import Panel from './Panel.jsx';
 
 
-
 class Main extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            updateDom: 0
+        }
 
 
         this.getArticles = this.getArticles.bind(this);
+        this.pushArticle = this.pushArticle.bind(this);
+        this.pushSnippet = this.pushSnippet.bind(this);
+
     }
 
     getArticles() {
@@ -27,6 +32,27 @@ class Main extends Component {
         return articleState;
     }
 
+    pushArticle(newArticle) {
+        this.props.subject.article_set.push(newArticle);
+        let value = this.state.updateDom;
+        this.setState({ updateDom: ++value });
+    }
+
+    pushSnippet(newSnippet) {
+        // https://medium.com/@benjamincherion/how-to-break-an-array-in-javascript-6d3a55bd06f6
+        this.props.subject.article_set.every((art) => {
+            if (art.id === newSnippet.article) {
+                art.htmlsnnipet_set.push(newSnippet)
+                return false;
+            }
+
+            return true;
+        });
+
+        let value = this.state.updateDom;
+        this.setState({ updateDom: ++value });
+    }
+
     render() {
         if (this.props.subject.title === undefined)
            return null
@@ -35,11 +61,17 @@ class Main extends Component {
         return(
             <main>
                 <section>
-                    <Articles article_set = { this.props.subject.article_set }/>
                     <Panel
                         articleNames = { articlesState.title }
                         articleId =  { articlesState.id }
+                        pushArticle = { this.pushArticle }
+                        pushSnippet = { this.pushSnippet }
                     />
+                    
+                    <Articles
+                        article_set = { this.props.subject.article_set }
+                    />
+                    
                 </section>
                 
                 <Nav articleNames = { articlesState.title }/>

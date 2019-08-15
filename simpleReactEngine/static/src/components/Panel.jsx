@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ArticlePanel from './ArticlePanel.jsx';
-import HtmlSnippetPanel from './HtmlSnippetPanel.jsx';
+import SnippetPanel from './SnippetPanel.jsx';
 import DisplayControl from './elements/DisplayControl.jsx';
 
 
@@ -25,11 +25,12 @@ class Panel extends Component {
 
     render() {
         return (
-            <footer>
+            <footer className = "Panel">
                 <div className="panel-blocks">
                     <ArticlePanel
                         articlePanelOn = { this.state.articlePanelOn }
                         onChange = { this.handleInputChange }
+                        pushArticle = { this.props.pushArticle }
                         csrftoken = { getCookie('csrftoken') }
                     />
                     <DisplayControl
@@ -44,9 +45,10 @@ class Panel extends Component {
                 <br/>
                 
                 <div className="panel-blocks">
-                    <HtmlSnippetPanel
+                    <SnippetPanel
                         htmlSnippetPanelOn = { this.state.htmlSnippetPanelOn }
                         onChange = { this.handleInputChange }
+                        pushSnippet = { this.props.pushSnippet }
                         articleNames = { this.props.articleNames }
                         articleId = { this.props.articleId }
                         csrftoken = { getCookie('csrftoken') }
