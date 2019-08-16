@@ -1,24 +1,35 @@
 import React, { Component } from 'react';
+import ReactDom from 'react-dom';
+import CreateAccount from './CreateAccount.jsx';
 
-function Login() { 
-    return (
-        <div className="Login">
-            <form action="#" method="POST">
-                <h1>Login Page</h1>
-                <label htmlFor="username">Username:</label>
-                <input type="text" id="username"></input>
-            
-                <label htmlFor="password">Password:</label>
-                <input type="password" id="password"></input>
 
-                <label htmlFor="loginBtn"></label>
-                <button type="submit" id="loginBtn">LOGIN</button>
-            </form>
-                
-        </div>
+class Login extends Component {
+    // state = {  }
+
+    changeToCreateAccount() {
+        ReactDom.render(<CreateAccount />, document.getElementById('root'))
+    }
     
-    );
+    render() { 
+        return (
+            <div className="Login">
+                <form action="#" method="POST">
+                    <h1>Login Page</h1>
+    
+                    <div className="separator">
+                        <input type="text" placeholder="USER"></input>
+                        <input type="password" placeholder="PASSWORD"></input>
+                    </div>
+    
+                    <small onClick = { this.changeToCreateAccount }>Create an Account</small>
+                    
+                    <button type="submit">LOGIN</button>
+                </form>
+                    
+            </div>
+        
+        );
+    }
 }
 
- 
 export default Login;

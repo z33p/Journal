@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import App from './components/App.jsx';
-import Base from './components/Base.jsx';
+import Header from './components/Header.jsx';
 
 
-ReactDom.render(<Base />, document.getElementById('base'))
+ReactDom.render(<Header />, document.getElementById('base'))
 ReactDom.render(<App />, document.getElementById('root'))

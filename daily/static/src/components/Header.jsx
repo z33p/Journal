@@ -5,7 +5,7 @@ import Login from './Login.jsx';
 import Main from './Main.jsx';
 
 
-class Base extends Component {
+class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -44,37 +44,36 @@ class Base extends Component {
             <li key={num++}><a href={`http://localhost:8000/sre/${subject}`}>{subject}</a></li>
         ));
         return (
-            <React.Fragment>
-                <div id="logo" >
-                    <h1>Journal</h1>
-                    <p>IFS Daily Journal - ADS</p>
-                </div>
-                <ul>
-                    <li onClick={this.changeToMain}>Home Page</li>
-                    <li onClick={this.changeToAbout}>About</li>
-                    <li style={{position: "relative", cursor: "default"}}>
-                        <span>
-                            Subjects
-                            <svg width="10px" height="8px" style={{marginLeft: "5px"}}>
-                                <line x1="0px" y1="0px" x2="5px" y2="5px" style={this.lineStyle}/>
-                                <line x1="10px" y1="0px" x2="5px" y2="5px" style={this.lineStyle}/>
-                            </svg>
-                        </span>
+            <>
+            <div id="logo" >
+                <h1>Journal</h1>
+                <p>IFS Daily Journal - ADS</p>
+            </div>
+            <ul>
+                <li onClick={this.changeToMain}>Home Page</li>
+                <li onClick={this.changeToAbout}>About</li>
+                <li style={{position: "relative", cursor: "default"}}>
+                    <span>
+                        Subjects
+                        <svg width="10px" height="8px" style={{marginLeft: "5px"}}>
+                            <line x1="0px" y1="0px" x2="5px" y2="5px" style={this.lineStyle}/>
+                            <line x1="10px" y1="0px" x2="5px" y2="5px" style={this.lineStyle}/>
+                        </svg>
+                    </span>
 
-                        <ul>
-                            {subjectItens}
-                        </ul>
-                    </li>
+                    <ul>
+                        {subjectItens}
+                    </ul>
+                </li>
 
-                    <li onClick={this.changeToLogin}>Log in</li>
-                </ul>
-
-            </React.Fragment>
+                <li onClick={this.changeToLogin}>Log in</li>
+            </ul>
+            </>
          );
     }
 }
 
-export default Base;
+export default Header;
 
 // links
 // https://www.youtube.com/watch?v=93p3LxR9xfM&t=605s
