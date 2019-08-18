@@ -1,4 +1,4 @@
-from rest_framework import viewsets, permissions, generics
+from rest_framework import viewsets, generics
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 from knox.models import AuthToken
@@ -52,9 +52,7 @@ class LoginAPI(generics.GenericAPIView):
 # Journal Viewset
 class SubjectViewSet(viewsets.ModelViewSet):
     queryset = models.Subject.objects.all()
-    permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly,
-    ]
+
     serializer_class = serializers.SubjectSerializer
 
     def get_serializer_context(self):
@@ -68,16 +66,12 @@ class SubjectViewSet(viewsets.ModelViewSet):
 
 class ArticleViewSet(viewsets.ModelViewSet):
     queryset = models.Article.objects.all()
-    permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly,
-    ]
+
     serializer_class = serializers.ArticleSerializer
 
 
 class SnnipetViewSet(viewsets.ModelViewSet):
     queryset = models.Snnipet.objects.all()
-    permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly,
-    ]
+
     serializer_class = serializers.SnnipetSerializer
 

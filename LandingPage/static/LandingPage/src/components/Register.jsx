@@ -25,7 +25,7 @@ class Register extends Component {
         const { username, email, password, password_again } = this.state;
         return (
             <div className = "Register">
-                <form action = { this.onSubmit }>
+                <form action = { this.onSubmit } method="POST">
                     <div className = "form-group">
                         <label htmlFor = "username">User</label>
                         <input
