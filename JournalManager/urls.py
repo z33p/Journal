@@ -16,10 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-
 urlpatterns = [
-    path('', include('daily.urls')),
     path('admin/', admin.site.urls),
-    path('sre/', include('simpleReactEngine.urls')),
+    path('', include('LandingPage.urls')),
+    path('', include('App.urls')),
+    path('api/', include('RestAPI.urls')),
 
 ]
