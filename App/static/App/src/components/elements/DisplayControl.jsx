@@ -29,9 +29,7 @@ class DisplayControl extends Component {
 
         } else {
             return (
-                <button
-                    onClick={ this.props.display_on }
-                >
+                <button onClick={ this.props.display_on }>
                     { this.props.msg_on }
                 </button>
             );

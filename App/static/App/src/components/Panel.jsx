@@ -9,7 +9,7 @@ class Panel extends Component {
         super(props);
         this.state = {
             articlePanelOn: false,
-            htmlSnippetPanelOn: false
+            snippetPanelOn: false
         }
     }
 
@@ -38,7 +38,6 @@ class Panel extends Component {
                         display_on = { () => { this.setState({ articlePanelOn: true }); } }
                         display_off = { () => { this.setState({ articlePanelOn: false }); } }
                         msg_on = "Display"
-                        msg_off = "Hide"
                     />
                 </div>
 
@@ -46,21 +45,19 @@ class Panel extends Component {
                 
                 <div className="panel-blocks">
                     <SnippetPanel
-                        htmlSnippetPanelOn = { this.state.htmlSnippetPanelOn }
+                        snippetPanelOn = { this.state.snippetPanelOn }
                         onChange = { this.handleInputChange }
                         pushSnippet = { this.props.pushSnippet }
                         articleNames = { this.props.articleNames }
                         articleId = { this.props.articleId }
                         csrftoken = { getCookie('csrftoken') }
-
                     />
                     
                     <DisplayControl
-                        objState = { this.state.htmlSnippetPanelOn }
-                        display_on = { () => { this.setState({ htmlSnippetPanelOn: true }); } }
-                        display_off = { () => { this.setState({ htmlSnippetPanelOn: false }); } }
+                        objState = { this.state.snippetPanelOn }
+                        display_on = { () => { this.setState({ snippetPanelOn: true }); } }
+                        display_off = { () => { this.setState({ snippetPanelOn: false }); } }
                         msg_on = "Display"
-                        msg_off = "Hide"
                     />
                 </div>
                 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TitleOrContent from './TitleOrContent.jsx';
 
 
-class HtmlSnippetPanel extends Component {
+class SnippetPanel extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,7 +17,7 @@ class HtmlSnippetPanel extends Component {
     }
 
     render() {
-        if (this.props.SnippetPanelOn) {
+        if (this.props.snippetPanelOn) {
             return (
                 <div className="panel-Snippet">
                     <h2>Snippet Panel</h2>
@@ -104,4 +104,4 @@ class HtmlSnippetPanel extends Component {
 }
 
 
-export default HtmlSnippetPanel;
+export default SnippetPanel;

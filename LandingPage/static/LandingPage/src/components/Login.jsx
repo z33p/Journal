@@ -4,9 +4,14 @@ import Register from './Register.jsx';
 
 
 class Login extends Component {
-    state = {
-        username: "",
-        password: ""
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: "",
+            password: ""
+        }
+
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     changeToRegister() {
@@ -16,12 +21,30 @@ class Login extends Component {
     onChange = e => this.setState({
         [e.target.name]: e.target.value
     });
+
+    onSubmit() {
+        // console.table(this.state)
+        fetch("http://localhost:8000/api/auth/login", {
+            method: "POST",
+            headers: new Headers({
+                'Content-type': 'application/json; charset=utf-8',
+                "X-CSRFToken": this.props.csrftoken,
+            }),
+            credentials: 'include',
+            body: JSON.stringify(this.state)
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            console.table(data);
+        })
+        .catch((err) => console.log("Err: " + err))
+    }
     
     render() {
         const { username, password } = this.state;
         return (
             <div className = "Login">
-                <form action = { this.onSubmit } >
+                <form action="#">
                     <h1>Login Page</h1>
     
                     <div className = "separator">
@@ -44,7 +67,7 @@ class Login extends Component {
     
                     <small onClick  =  { this.changeToRegister }>Create an Account</small>
                     
-                    <button type = "submit">LOGIN</button>
+                    <button onClick = { this.onSubmit }>Login</button>
                 </form>
                     
             </div>

@@ -15,9 +15,10 @@ class Header extends Component {
 
     componentDidMount() {
         const username = document.getElementById("username").innerHTML;
-        fetch(`http://localhost:8000/api/users/${username}/`)
-        .then(res => res.json())
-        .then(data => this.setState({subjects: data.subject_name}));
+        if (username !== "AnonymousUser")
+            fetch(`http://localhost:8000/api/users/${username}/`)
+            .then(res => res.json())
+            .then(data => this.setState({subjects: data.subject_name}));
     }
 
     changeToAbout() {
