@@ -6,9 +6,11 @@
   "scripts": {
     "dev-app": "webpack --mode development --watch ./App/static/App/src/index.js --output ./App/static/App/main.js",
     "build-app": "webpack --mode production ./App/static/App/src/index.js --output ./App/static/App/main.js",
-    
+
     "dev-land": "webpack --mode development --watch ./LandingPage/static/LandingPage/src/index.js --output ./LandingPage/static/LandingPage/main.js",
-    "build-land": "webpack --mode production --watch ./LandingPage/static/LandingPage/src/index.js --output ./LandingPage/static/LandingPage/main.js"
+    "build-land": "webpack --mode production --watch ./LandingPage/static/LandingPage/src/index.js --output ./LandingPage/static/LandingPage/main.js",
+
+    "build": "webpack --mode production ./App/static/App/src/index.js --output ./App/static/App/main.js; webpack --mode production ./LandingPage/static/LandingPage/src/index.js --output ./LandingPage/static/LandingPage/main.js"
   },
   "keywords": [],
   "author": "",

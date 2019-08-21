@@ -38,6 +38,8 @@ class Articles extends Component {
                 <article key={art.id} id={art.title}>
                     <h2>{ art.title }</h2>
                     { this.createSnippets(art) }
+                    
+                    <hr/>
                 </article>
             );
         });

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 function TitleOrContent(props) {
-    if (props.htmlTag === "p")
+    if (props.tag === "p")
         return (
             <>
             <h3>Content</h3>
