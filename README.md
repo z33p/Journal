@@ -18,7 +18,7 @@ z33p@debian:~/Development/Django-Projects/testing/Journal$ pipenv shell
 ```
 
 ### React config
-```bash
+```console
 # Install dependencies
 z33p@debian:~/Development/Django-Projects/testing/Journal$ npm install
 
