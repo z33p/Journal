@@ -3,6 +3,9 @@ import ReactDom from 'react-dom';
 import Main from './Main.jsx'
 import Header from './Header.jsx'
 
+import { Provider } from 'react-redux';
+import store from '../store';
+
 
 class App extends Component {
     constructor(props) {
@@ -27,10 +30,13 @@ class App extends Component {
 
     render() {
         return (
-            <>
+            <Provider store={store}>
+                <>
                 <Header title={ this.state.subject.title }/>
                 <Main subject={ this.state.subject }/>
-            </>
+                </>
+            </Provider>
+            
         );
     }
 }

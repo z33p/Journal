@@ -10,13 +10,11 @@ class Header extends Component {
         super(props);
         this.state = {
             subjects: [],
-            userToken: ""
+            // userToken: ""
         }
 
-        this.setUserToken = this.setUserToken.bind(this);
-
         const username = document.getElementById("username").innerHTML;
-        if (username !== "AnonymousUser" && this.state.userToken)
+        if (username !== "AnonymousUser") // && this.state.userToken
             fetch(`http://localhost:8000/api/users/${username}/`)
             .then(res => res.json())
             .then(data => this.setState({subjects: data.subject_name}));

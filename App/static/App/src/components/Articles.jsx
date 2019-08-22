@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { getSubject } from '../actions/subject'
 
 
 class Articles extends Component {
+    static propTypes = {
+        subject: PropTypes.array.isRequired
+    };
+
+    componentDidMount() {
+        this.props.getSubject();
+    }
 
     createSpan(content) {
         let spans = []
@@ -56,5 +66,9 @@ class Articles extends Component {
         );
     }
 }
+
+const mapStateToProps = state => ({
+    subject: state.subject.subject
+});
  
-export default Articles;
+export default connect(mapStateToProps, { getSubject })(Articles);

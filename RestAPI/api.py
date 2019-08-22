@@ -12,7 +12,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     This viewset automatically provides `list` and `detail` actions.
     """
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
     queryset = User.objects.all()
     serializer_class = serializers.UserSerializer
     lookup_field = 'username'
@@ -52,11 +52,11 @@ class LoginAPI(generics.GenericAPIView):
 
 # Journal Viewset
 class SubjectViewSet(viewsets.ModelViewSet):
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
 
-    def get_queryset(self):
-        user = self.request.user
-        return models.Subject.objects.filter(owner=user)
+    # def get_queryset(self):
+    #     user = self.request.user
+    #     return models.Subject.objects.filter(owner=user)
 
     queryset = models.Subject.objects.all()
     serializer_class = serializers.SubjectSerializer
