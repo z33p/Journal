@@ -37,7 +37,7 @@ Running migrations:
 ```
 
 ### React config
-```console
+```bash
 # Install dependencies
 z33p@debian:~/Development/Django-Projects/testing/Journal$ npm install
 
