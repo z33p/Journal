@@ -1,4 +1,4 @@
-from rest_framework import viewsets, generics
+from rest_framework import viewsets, generics, permissions
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 from knox.models import AuthToken
@@ -12,6 +12,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     This viewset automatically provides `list` and `detail` actions.
     """
+    permission_classes = [permissions.IsAuthenticated]
     queryset = User.objects.all()
     serializer_class = serializers.UserSerializer
     lookup_field = 'username'
@@ -51,8 +52,13 @@ class LoginAPI(generics.GenericAPIView):
 
 # Journal Viewset
 class SubjectViewSet(viewsets.ModelViewSet):
-    queryset = models.Subject.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
 
+    def get_queryset(self):
+        user = self.request.user
+        return models.Subject.objects.filter(owner=user)
+
+    queryset = models.Subject.objects.all()
     serializer_class = serializers.SubjectSerializer
 
     def get_serializer_context(self):
@@ -65,13 +71,15 @@ class SubjectViewSet(viewsets.ModelViewSet):
 
 
 class ArticleViewSet(viewsets.ModelViewSet):
-    queryset = models.Article.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
 
+    queryset = models.Article.objects.all()
     serializer_class = serializers.ArticleSerializer
 
 
 class SnnipetViewSet(viewsets.ModelViewSet):
-    queryset = models.Snnipet.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
 
+    queryset = models.Snnipet.objects.all()
     serializer_class = serializers.SnnipetSerializer
 

@@ -23,7 +23,7 @@ class Login extends Component {
     });
 
     onSubmit() {
-        // console.table(this.state)
+        console.table(this.state)
         fetch("http://localhost:8000/api/auth/login", {
             method: "POST",
             headers: new Headers({
@@ -35,7 +35,7 @@ class Login extends Component {
         })
         .then((res) => res.json())
         .then((data) => {
-            console.table(data);
+            console.log(data.token);
         })
         .catch((err) => console.log("Err: " + err))
     }
@@ -44,7 +44,7 @@ class Login extends Component {
         const { username, password } = this.state;
         return (
             <div className = "Login">
-                <form action="#">
+                <div>
                     <h1>Login Page</h1>
     
                     <div className = "separator">
@@ -68,7 +68,7 @@ class Login extends Component {
                     <small onClick  =  { this.changeToRegister }>Create an Account</small>
                     
                     <button onClick = { this.onSubmit }>Login</button>
-                </form>
+                </div>
                     
             </div>
         

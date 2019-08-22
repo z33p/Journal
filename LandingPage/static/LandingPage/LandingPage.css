@@ -176,7 +176,7 @@ main div a:hover {
     text-align: center;
 }
 
-.Login form {
+.Login:first-child {
     margin-top: 4em;
     display: inline-block;
     width: 600px;

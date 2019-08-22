@@ -6,8 +6,8 @@ from knox import views as knox_views
 
 router = routers.DefaultRouter()
 router.register('subject',  api.SubjectViewSet, 'subject')
-router.register('article',  api.ArticleViewSet, 'article')
-router.register('snnipet',  api.SnnipetViewSet, 'snnipet')
+# router.register('article',  api.ArticleViewSet, 'article')
+# router.register('snnipet',  api.SnnipetViewSet, 'snnipet')
 router.register('users', api.UserViewSet, 'users')
 
 urlpatterns = [

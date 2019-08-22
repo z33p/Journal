@@ -4,7 +4,6 @@ import Main from './Main.jsx'
 import Header from './Header.jsx'
 
 
-
 class App extends Component {
     constructor(props) {
         super(props);
