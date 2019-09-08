@@ -25,9 +25,6 @@ SECRET_KEY = 'n20f30p*9+14%!*a90068j-1f=)^$_3+98rx60xumn7blpm=ic'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = []
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,7 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # My Apps
-    'LandingPage',
     'App',
     'RestAPI',
 
@@ -48,14 +44,6 @@ INSTALLED_APPS = [
     'knox',
     'corsheaders',
 ]
-
-# REST_FRAMEWORK = {
-#     'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
-    # 'DEFAULT_PERMISSION_CLASSES': (
-    #     'rest_framework.permissions.IsAuthenticated',
-    # )
-# }
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -139,5 +127,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CORS_ORIGIN_WHITELIST = ("http://127.0.0.1:8000",)
+ALLOWED_HOSTS = ["127.0.0.1", "192.168.0.109", "0.0.0.0"]
+
+CORS_ORIGIN_WHITELIST = (
+    "http://" + ALLOWED_HOSTS[0] + ":8000",
+    "http://" + ALLOWED_HOSTS[1] + ":8000",
+    "http://" + ALLOWED_HOSTS[2] + ":8000",
+    )
 CORS_ALLOW_CREDENTIALS = True
