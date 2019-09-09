@@ -4,10 +4,12 @@
 
 @tailwind utilities;
 
+/* To Home, About, Login */
 .h-screen-85 {
     height: 85vh;
 }
 
+/* To link in about page */
 .text-blue {
     color: rgb(25, 25, 255);
 }

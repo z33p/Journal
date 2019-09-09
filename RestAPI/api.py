@@ -28,8 +28,13 @@ class RegisterAPI(generics.GenericAPIView):
         )
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
+        user_data = serializers.UserSerializer(user, context=self.get_serializer_context()).data
         return Response({
-            "user": serializers.UserSerializer(user, context=self.get_serializer_context()).data,
+            "user": {
+                "id": user_data.get("id"),
+                "username": user_data.get("username"),
+                "email": user_data.get("email")
+            },
             "token": AuthToken.objects.create(user)[1]
         })
 
@@ -44,21 +49,26 @@ class LoginAPI(generics.GenericAPIView):
         )
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data
+        user_data = serializers.UserSerializer(user, context=self.get_serializer_context()).data
         return Response({
-            "user": serializers.UserSerializer(user, context=self.get_serializer_context()).data,
+            "user": {
+                "id": user_data.get("id"),
+                "username": user_data.get("username"),
+                "email": user_data.get("email")
+            },
             "token": AuthToken.objects.create(user)[1]
         })
 
 
 # Journal Viewset
 class SubjectViewSet(viewsets.ModelViewSet):
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
-    # def get_queryset(self):
-    #     user = self.request.user
-    #     return models.Subject.objects.filter(owner=user)
+    def get_queryset(self):
+        user = self.request.user
+        return self.request.user.subject_set.all()
 
-    queryset = models.Subject.objects.all()
+    # queryset = models.Subject.objects.all()
     serializer_class = serializers.SubjectSerializer
 
     def get_serializer_context(self):
