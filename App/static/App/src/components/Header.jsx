@@ -20,19 +20,19 @@ class Header extends Component {
                     </div>
 
                     <nav className="pt-3 md:pt-0 text-xl md:text-2xl text-right">
-                        <Link className="mr-6 cursor-pointer" to="/journal/">Home</Link>
-                        <Link className="mr-6 cursor-pointer" to="/journal/about/">About</Link>
-                        <Link className="mr-6 cursor-pointer" to="/journal/subjects/">Subjects</Link>
-                        <Link className="mr-6 md:mr-12 cursor-pointer" to="/journal/login/">Log in</Link>
+                        <Link className="mr-6 cursor-pointer" to="/">Home</Link>
+                        <Link className="mr-6 cursor-pointer" to="/about/">About</Link>
+                        <Link className="mr-6 cursor-pointer" to="/subjects/">Subjects</Link>
+                        <Link className="mr-6 md:mr-12 cursor-pointer" to="/login/">Log in</Link>
                     </nav>
                 </header>
 
                 <Switch>
-                    <Route path="/journal/" exact component={Home} />
-                    <Route path="/journal/about/"  component={About} />
-                    <Route path="/journal/subjects/"  component={Subjects} />
-                    <Route path="/journal/login/" component={Login} />
-                    <Route path="/journal/register/" component={Register}/>
+                    <Route path="/" exact component={Home} />
+                    <Route path="/about/"  component={About} />
+                    <Route path="/subjects/"  component={Subjects} />
+                    <Route path="/login/" component={Login} />
+                    <Route path="/register/" component={Register}/>
                 </Switch>
             </Router>
         );

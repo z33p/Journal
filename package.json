@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack --mode development --watch ./App/static/App/src/index.js --output ./App/static/App/main.js",
-    "build": "webpack --mode production ./App/static/App/src/index.js --output ./App/static/App/main.js; webpack --mode production ./LandingPage/static/LandingPage/src/index.js --output ./LandingPage/static/LandingPage/main.js"
+    "build": "webpack --mode production ./App/static/App/src/index.js --output ./App/static/App/main.js"
   },
   "keywords": [],
   "author": "",
