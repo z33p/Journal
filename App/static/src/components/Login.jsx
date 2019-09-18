@@ -65,7 +65,7 @@ class Login extends Component {
               <p className="hidden text-red-500 text-xs italic">
                 Please choose a password.
               </p>
-              <Link className="italic" to="/journal/register/">
+              <Link className="italic" to="/register/">
                 Create an account?
               </Link>
             </div>

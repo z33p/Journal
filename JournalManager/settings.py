@@ -86,13 +86,23 @@ WSGI_APPLICATION = 'JournalManager.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': "journal",
+        'USER': "postgres",
+        'PASSWORD': "postgres",
+        'HOST': "127.0.0.1",
+        'PORT': "5432",
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -138,5 +148,6 @@ CORS_ORIGIN_WHITELIST = (
     "http://" + ALLOWED_HOSTS[0] + ":8000",
     "http://" + ALLOWED_HOSTS[1] + ":8000",
     "http://" + ALLOWED_HOSTS[2] + ":8000",
+    "http://localhost:3000"
     )
 CORS_ALLOW_CREDENTIALS = True

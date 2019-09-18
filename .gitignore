@@ -134,3 +134,6 @@ dmypy.json
 
 # Trash
 Trash
+
+# tailwindcss compiled
+main.css
