@@ -25,9 +25,6 @@ SECRET_KEY = 'v*$y-47phu$v$_455clcj1le6+*ed)ur(n-%u48onw!en&n+bd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -46,8 +43,15 @@ INSTALLED_APPS = [
     # Third Apps
     'rest_framework',
     'knox',
-    'corsheaders',    
+    'corsheaders',
 ]
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework.authentication.BasicAuthentication',
+#         'rest_framework.authentication.SessionAuthentication',
+#     ]
+# }
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',)
@@ -141,5 +145,5 @@ CORS_ORIGIN_WHITELIST = (
     "http://" + ALLOWED_HOSTS[1] + ":8000",
     "http://" + ALLOWED_HOSTS[2] + ":8000",
     "http://localhost:3000"
-    )
+)
 CORS_ALLOW_CREDENTIALS = True

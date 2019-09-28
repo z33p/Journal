@@ -1,14 +1,14 @@
 import axios from "axios";
 import { tokenConfig } from "./Accounts/auth";
-import { GET_SUBJECT, CREATE_SUBJECT } from "./types";
+import { GET_ARTICLES, CREATE_ARTICLES } from "./types";
 
 // GET SUBJECT
-export const getSubject = id => (dispatch, getState) => {
+export const getArticles = () => dispatch => {
   axios
-    .get(`/api/subject/${id}`, tokenConfig(getState))
+    .get("/api/article/")
     .then(res => {
       dispatch({
-        type: GET_SUBJECT,
+        type: GET_ARTICLES,
         payload: res.data
       });
     })
@@ -16,13 +16,20 @@ export const getSubject = id => (dispatch, getState) => {
 };
 
 // CREATE LEAD
-export const createSubject = title => (dispatch, getState) => {
+export const createArticle = (title, description, subject) => (
+  dispatch,
+  getState
+) => {
   axios
-    .post("/api/subject/", { title }, tokenConfig(getState))
+    .post(
+      "/api/article/",
+      { title, description, subject },
+      tokenConfig(getState)
+    )
     .then(res => {
       // dispatch(createMessage({ addLead: "Lead Added" }));
       dispatch({
-        type: CREATE_SUBJECT,
+        type: CREATE_ARTICLES,
         payload: res.data
       });
     })

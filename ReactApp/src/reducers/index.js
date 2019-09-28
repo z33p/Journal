@@ -1,8 +1,10 @@
-import { combineReducers } from 'redux';
-import subject from './subject';
-import Auth from './Auth';
+import { combineReducers } from "redux";
+import subject from "./subject";
+import articles from "./article";
+import auth from "./auth";
 
 export default combineReducers({
-    subject,
-    Auth
+  subject,
+  articles,
+  auth
 });

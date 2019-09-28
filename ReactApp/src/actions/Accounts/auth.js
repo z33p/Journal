@@ -13,25 +13,9 @@ export const loadUser = () => (dispatch, getState) => {
   // User Loading
   dispatch({ type: USER_LOADING });
 
-  // Get token from state
-  const token = getState().Auth.token;
-
-  // Headers
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
-
-  // If token, add to headers config
-  if (token) {
-    config.headers["authorization"] = `Token ${token}`;
-  }
-
   axios
-    .get("/api/auth/user", config)
+    .get("/api/auth/user", tokenConfig(getState))
     .then(res => {
-      console.log(res)
       dispatch({
         type: USER_LOADED,
         payload: res.data
@@ -71,7 +55,7 @@ export const login = userAndPassword => dispatch => {
 // LOGOUT USER
 export const logout = () => dispatch => {
   axios
-    .post("/api/auth/logout/")
+    .post("/api/auth/logout/", null, tokenConfig(getState))
     .then(res => {
       dispatch({
         type: LOGOUT_SUCCESS,
@@ -81,6 +65,26 @@ export const logout = () => dispatch => {
     .catch(err => {
       console.log(err);
     });
+};
+
+// Setup config with token - helper function
+export const tokenConfig = getState => {
+  // Get token from state
+  const token = getState().auth.token;
+
+  // Headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  // If token, add to headers config
+  if (token) {
+    config.headers["authorization"] = `Token ${token}`;
+  }
+
+  return config;
 };
 
 // https://www.youtube.com/watch?v=kfpY5BsIoFg

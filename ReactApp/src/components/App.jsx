@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import ReactDom from "react-dom";
-import Header from "./Header.jsx";
-import { loadUser } from "../actions/Accounts/auth";
-import "../styles.css";
-
 import { Provider } from "react-redux";
+import { BrowserRouter as Router } from "react-router-dom";
+import Header from "./Header.jsx";
+import Main from "./Main.jsx";
+import { loadUser } from "../actions/Accounts/auth";
 import store from "../store";
+import "../styles.css";
 
 class App extends Component {
   constructor(props) {
@@ -15,7 +16,12 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Header />
+        <Router>
+          <>
+            <Header />
+            <Main />
+          </>
+        </Router>
       </Provider>
     );
   }

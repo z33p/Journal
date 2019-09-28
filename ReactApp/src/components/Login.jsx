@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../actions/Accounts/auth";
@@ -16,8 +16,6 @@ class Login extends Component {
     // Methods
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-
-    this.onSubmit();
   }
 
   static propTypes = {
@@ -33,15 +31,16 @@ class Login extends Component {
     this.props.login(this.state);
   }
   render() {
+    if (this.props.isAuthenticated) return <Redirect to="/user/" />;
     const { username, /*email,*/ password } = this.state;
     return (
       <main className="h-screen-85 text-center bg-gray-200">
-        <div className="inline-block mt-12 w-full max-w-xs">
-          <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <h1 className="mb-4 text-3xl">Log in</h1>
+        <div className="inline-block mt-12 w-full max-w-xs md:max-w-sm">
+          <form className="bg-gray-700 text-white shadow-2xl rounded px-8 pt-6 pb-8 mb-4">
+            <h1 className="mb-4 text-4xl font-semibold">Log in</h1>
             <div className="mb-4">
               <label
-                className="block text-left text-gray-700 text-sm font-bold mb-2"
+                className="block text-left text-sm font-bold mb-2"
                 htmlFor="username"
               >
                 Username
@@ -57,7 +56,7 @@ class Login extends Component {
             </div>
             {/* <div className="mb-4">
               <label
-                className="block text-left text-gray-700 text-sm font-bold mb-2"
+                className="block text-left text-sm font-bold mb-2"
                 htmlFor="username"
               >
                 Email
@@ -73,7 +72,7 @@ class Login extends Component {
             </div> */}
             <div className="mb-6">
               <label
-                className="block text-left text-gray-700 text-sm font-bold mb-2"
+                className="block text-left text-sm font-bold mb-2"
                 htmlFor="password"
               >
                 Password
@@ -89,20 +88,20 @@ class Login extends Component {
               <p className="hidden text-red-500 text-xs italic">
                 Please choose a password.
               </p>
-              <Link className="italic" to="/register/">
+              <Link className="italic hover:underline" to="/register/">
                 Create an account?
               </Link>
             </div>
             <div className="flex items-center justify-between">
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="py-2 px-6 rounded border hover:border-black bg-blue-600 text-white hover:bg-gray-200 hover:text-blue-600 font-bold"
                 type="button"
                 onClick={this.onSubmit}
               >
                 Enter
               </button>
               <a
-                className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+                className="inline-block hover:underline align-baseline font-bold text-sm text-white"
                 href="#"
               >
                 Forgot Password?
@@ -119,7 +118,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.Auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(

@@ -36,4 +36,4 @@ class Snnipet(models.Model):
     created_at = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return self.title if self.title else self.content[:30] + "..."
+        return self.title

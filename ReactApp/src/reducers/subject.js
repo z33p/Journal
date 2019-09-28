@@ -1,18 +1,24 @@
-import { GET_SUBJECT } from "../actions/types.js"
+import { GET_SUBJECT, CREATE_SUBJECT } from "../actions/types.js";
 
 const initialState = {
-    subject: []
-}
+  subject: {}
+};
 
-export default function (state = initialState, action) {
-    switch (action.type) {
-        case GET_SUBJECT:
-            return {
-                ...state,
-                subject: action.payload
-            }
+export default function(state = initialState, action) {
+  switch (action.type) {
+    case GET_SUBJECT:
+      return {
+        ...state,
+        subject: action.payload
+      };
 
-        default:
-            return state;
-    }
+    case CREATE_SUBJECT:
+      return {
+        ...state
+        // subject: [...state.subject, action.payload]
+      };
+
+    default:
+      return state;
+  }
 }

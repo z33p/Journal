@@ -12,6 +12,10 @@ class SnnipetSerializer(serializers.ModelSerializer):
 class ArticleSerializer(serializers.ModelSerializer):
     snnipet_set = SnnipetSerializer(many=True, read_only=True)
 
+    # Correlaciona a pk de "snnipet_set" com a "StringRelatedField"
+    snnipet_name = serializers.StringRelatedField(
+        source="snnipet_set", many=True, read_only=True)
+
     class Meta:
         model = models.Article
         fields = '__all__'
@@ -27,10 +31,10 @@ class SubjectSerializer(serializers.ModelSerializer):
         request = self.context['request']
 
         if models.Subject.objects.filter(owner=request.user.pk, title=title):
-            raise serializers.ValidationError("Erro: O Subject já existe para este usuário.")
+            raise serializers.ValidationError(
+                "Erro: O Subject já existe para este usuário.")
         return title
 
     class Meta:
         model = models.Subject
         fields = '__all__'
-
