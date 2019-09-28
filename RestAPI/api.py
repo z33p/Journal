@@ -1,66 +1,18 @@
-from rest_framework import viewsets, generics, permissions
-from rest_framework.response import Response
-from django.contrib.auth.models import User
-from knox.models import AuthToken
+from rest_framework import viewsets, permissions
 
 from . import serializers
-from . import models
+from .models import Subject, Article, Snnipet
 
-
+"""
 # User API
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    This viewset automatically provides `list` and `detail` actions.
-    """
+    # This viewset automatically provides `list` and `detail` actions.
     # permission_classes = [permissions.IsAuthenticated]
     queryset = User.objects.all()
     serializer_class = serializers.UserSerializer
     lookup_field = 'username'
+"""
 
-
-# Register API
-class RegisterAPI(generics.GenericAPIView):
-    serializer_class = serializers.RegisterSerializer
-
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(
-            data=request.data
-        )
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-        user_data = serializers.UserSerializer(user, context=self.get_serializer_context()).data
-        return Response({
-            "user": {
-                "id": user_data.get("id"),
-                "username": user_data.get("username"),
-                "email": user_data.get("email")
-            },
-            "token": AuthToken.objects.create(user)[1]
-        })
-
-
-# Login API
-class LoginAPI(generics.GenericAPIView):
-    serializer_class = serializers.LoginSerializer
-
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(
-            data=request.data
-        )
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data
-        user_data = serializers.UserSerializer(user, context=self.get_serializer_context()).data
-        return Response({
-            "user": {
-                "id": user_data.get("id"),
-                "username": user_data.get("username"),
-                "email": user_data.get("email")
-            },
-            "token": AuthToken.objects.create(user)[1]
-        })
-
-
-# Journal Viewset
 class SubjectViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
@@ -68,7 +20,7 @@ class SubjectViewSet(viewsets.ModelViewSet):
         user = self.request.user
         return self.request.user.subject_set.all()
 
-    # queryset = models.Subject.objects.all()
+    # queryset = Subject.objects.all()
     serializer_class = serializers.SubjectSerializer
 
     def get_serializer_context(self):
@@ -83,13 +35,12 @@ class SubjectViewSet(viewsets.ModelViewSet):
 class ArticleViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
-    queryset = models.Article.objects.all()
+    queryset = Article.objects.all()
     serializer_class = serializers.ArticleSerializer
 
 
 class SnnipetViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
-    queryset = models.Snnipet.objects.all()
+    queryset = Snnipet.objects.all()
     serializer_class = serializers.SnnipetSerializer
-

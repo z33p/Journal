@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development --watch ./App/src/components/App.jsx --output ./App/static/App/main.js",
-    "build": "webpack --mode production ./App/src/components/App.jsx --output ./App/static/App/main.js"
+    "dev": "webpack --mode development --watch ./ReactApp/src/components/App.jsx --output ./ReactApp/static/ReactApp/main.js",
+    "build": "webpack --mode production ./ReactApp/src/components/App.jsx --output ./ReactApp/static/ReactApp/main.js"
   },
   "keywords": [],
   "author": "",
