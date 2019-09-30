@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Nav from "./Nav.jsx";
-import Panel from "./Panel.jsx";
 
 class UserPage extends Component {
   // state = {};
@@ -17,7 +16,6 @@ class UserPage extends Component {
         <Nav />
         <div className="w-full">
           <h1>Hello {username}</h1>
-          <Panel />
         </div>
       </main>
     );
@@ -25,7 +23,7 @@ class UserPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.auth.user
+  user: state.reducers.auth.user
 });
 
 export default connect(mapStateToProps)(UserPage);

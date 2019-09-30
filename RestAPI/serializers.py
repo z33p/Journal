@@ -1,8 +1,8 @@
 from rest_framework import serializers
+from django.contrib.auth.models import User
 from . import models
 
 
-# Journal Serializer
 class SnnipetSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Snnipet
@@ -11,10 +11,6 @@ class SnnipetSerializer(serializers.ModelSerializer):
 
 class ArticleSerializer(serializers.ModelSerializer):
     snnipet_set = SnnipetSerializer(many=True, read_only=True)
-
-    # Correlaciona a pk de "snnipet_set" com a "StringRelatedField"
-    snnipet_name = serializers.StringRelatedField(
-        source="snnipet_set", many=True, read_only=True)
 
     class Meta:
         model = models.Article
@@ -38,3 +34,12 @@ class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Subject
         fields = '__all__'
+
+
+class UserSerializer(serializers.ModelSerializer):
+    subject_set = SubjectSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = User
+        fields = ('subject_set',)
+        # fields = '__all__'

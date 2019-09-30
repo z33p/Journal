@@ -1,12 +1,12 @@
-import { GET_ARTICLES } from "../actions/types.js";
+import { GET_SNNIPETS, CREATE_SNNIPETS } from "../actions/types.js";
 
 const initialState = {
-  articles: []
+  snnipets: []
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case GET_ARTICLES:
+    case GET_SNNIPETS:
       return {
         ...state,
         articles: action.payload

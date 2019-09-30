@@ -6,10 +6,23 @@
 
 /* To Home, About, Login */
 .h-screen-85 {
-    height: 85vh;
+  height: 85vh;
 }
 
 /* To link in about page */
 .text-blue {
-    color: rgb(25, 25, 255);
+  color: rgb(25, 25, 255);
+}
+
+.dropdown li {
+  position: relative;
+}
+
+.dropdown li ul {
+  position: absolute;
+  display: none;
+}
+
+.dropdown li:hover ul {
+  display: block;
 }

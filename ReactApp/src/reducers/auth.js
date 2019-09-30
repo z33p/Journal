@@ -1,57 +1,58 @@
 import {
-    USER_LOADING,
-    USER_LOADED,
-    AUTH_ERROR,
-    LOGIN_FAIL,
-    LOGIN_SUCCESS,
-    LOGOUT_SUCCESS
-  } from "../actions/Accounts/types";
-  
-  const initialState = {
-    token: localStorage.getItem("token"),
-    isAuthenticated: null,
-    isLoading: false,
-    user: null
-  };
-  
-  export default function(state = initialState, action) {
-    switch (action.type) {
-      case USER_LOADING:
-        return {
-          ...state,
-          isLoading: true
-        };
-  
-      case USER_LOADED:
-        return {
-          ...state,
-          isAuthenticated: true,
-          isLoading: false,
-          user: action.payload
-        };
-  
-      case LOGIN_SUCCESS:
-        localStorage.setItem("token", action.payload.token);
-        return {
-          ...state,
-          ...action.payload,
-          isAuthenticated: true,
-          isLoading: false
-        };
-  
-      case AUTH_ERROR:
-      case LOGIN_FAIL:
-      case LOGOUT_SUCCESS:
-        localStorage.removeItem("token");
-        return {
-          ...state,
-          token: null,
-          user: null,
-          isAuthenticated: false,
-          isLoading: false
-        };
-  
-      default:
-        return state;
-    }
+  USER_LOADING,
+  USER_LOADED,
+  AUTH_ERROR,
+  LOGIN_FAIL,
+  LOGIN_SUCCESS,
+  LOGOUT_SUCCESS
+} from "../actions/Accounts/types";
+
+export default function(state, action) {
+  let auth = { ...state.auth };
+
+  switch (action.type) {
+    case USER_LOADING:
+      auth.isLoading = true;
+      return {
+        subject: state.subject,
+        auth
+      };
+
+    case USER_LOADED:
+      auth.isLoading = false;
+      auth.isAuthenticated = true;
+      auth.user = action.payload;
+
+      return {
+        subject: state.subject,
+        auth
+      };
+
+    case LOGIN_SUCCESS:
+      auth.isLoading = false;
+      localStorage.setItem("token", action.payload.token);
+      auth.isAuthenticated = true;
+      auth.user = action.payload.user;
+
+      return {
+        subject: state.subject,
+        auth
+      };
+
+    case AUTH_ERROR:
+    case LOGIN_FAIL:
+    case LOGOUT_SUCCESS:
+      localStorage.removeItem("token");
+      auth.token = null;
+      auth.user = null;
+      auth.isAuthenticated = false;
+      auth.isLoading = false;
+      return {
+        subject: state.subject,
+        auth
+      };
+
+    default:
+      return state;
   }
+}

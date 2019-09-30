@@ -3,14 +3,13 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { createArticle } from "../../actions/article";
 
-class SnnipetPanel extends Component {
+class ArtPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
       title: "",
-      content: "",
-      tag: "p",
-      article: this.props.articles[0].title
+      description: "",
+      subject: this.props.subject
     };
 
     // Methods
@@ -27,30 +26,16 @@ class SnnipetPanel extends Component {
   }
 
   onSubmit() {
-    const { title, content, subject } = this.state;
-    this.props.createArticle(title, content, subject);
+    const { title, description, subject } = this.state;
+    this.props.createArticle(title, description, subject);
     this.setState({ title: "" });
-    this.setState({ content: "" });
-  }
-
-  loadOptArt() {
-    const { snnipet_set, snnipet_id } = this.props.article_set;
-    let options = [];
-    for (let i in snnipet_set) {
-      options.push(
-        <option key={snnipet_set[i]} value={snnipet_set[i]}>
-          {snnipet_id[i]}
-        </option>
-      );
-    }
-
-    return options;
+    this.setState({ description: "" });
   }
 
   render() {
     if (!this.props.panelOn) return null;
 
-    const { title, content, subject } = this.state;
+    const { title, description, subject } = this.state;
     return (
       <div className="p-6">
         <h1 className="mb-2 text-3xl font-semibold">Insira o Artigo</h1>
@@ -69,30 +54,18 @@ class SnnipetPanel extends Component {
             />
           </div>
           <div className="mb-4 text-left">
-            <label className="block text-xl" htmlFor="content">
+            <label className="block text-xl" htmlFor="description">
               Descrição
             </label>
             <textarea
               className="w-full p-1 text-black"
               type="text"
-              name="content"
-              id="content"
+              name="description"
+              id="description"
               rows="4"
-              value={content}
+              value={description}
               onChange={this.onChange}
             />
-          </div>
-
-          <div className="my-4">
-            <select
-              className="p-2 bg-white text-blue-500"
-              name="subject"
-              id="subject"
-              value={subject}
-              onChange={this.onChange}
-            >
-              {this.loadOptArt()}
-            </select>
           </div>
 
           <button
@@ -111,4 +84,4 @@ class SnnipetPanel extends Component {
 export default connect(
   null,
   { createArticle }
-)(SnnipetPanel);
+)(ArtPanel);

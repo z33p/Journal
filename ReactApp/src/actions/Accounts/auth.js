@@ -53,7 +53,7 @@ export const login = userAndPassword => dispatch => {
 };
 
 // LOGOUT USER
-export const logout = () => dispatch => {
+export const logout = () => (dispatch, getState) => {
   axios
     .post("/api/auth/logout/", null, tokenConfig(getState))
     .then(res => {
@@ -70,7 +70,7 @@ export const logout = () => dispatch => {
 // Setup config with token - helper function
 export const tokenConfig = getState => {
   // Get token from state
-  const token = getState().auth.token;
+  const token = getState().reducers.auth.token;
 
   // Headers
   const config = {

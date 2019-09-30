@@ -1,17 +1,16 @@
 from rest_framework import viewsets, permissions
-
+from django.contrib.auth.models import User
 from . import serializers
 from .models import Subject, Article, Snnipet
 
-"""
-# User API
+
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     # This viewset automatically provides `list` and `detail` actions.
     # permission_classes = [permissions.IsAuthenticated]
     queryset = User.objects.all()
     serializer_class = serializers.UserSerializer
     lookup_field = 'username'
-"""
+
 
 class SubjectViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]

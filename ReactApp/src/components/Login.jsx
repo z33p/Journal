@@ -118,7 +118,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.reducers.auth.isAuthenticated
 });
 
 export default connect(

@@ -1,4 +1,8 @@
-export const GET_SUBJECT = "GET_SUBJECT";
 export const GET_ARTICLES = "GET_ARTICLES";
-export const CREATE_SUBJECT = "CREATE_SUBJECT";
 export const CREATE_ARTICLES = "CREATE_ARTICLES";
+
+export const GET_SUBJECT = "GET_SUBJECT";
+export const CREATE_SUBJECT = "CREATE_SUBJECT";
+
+export const GET_SNNIPETS = "GET_SNNIPETS";
+export const CREATE_SNNIPET = "CREATE_SNNIPET";

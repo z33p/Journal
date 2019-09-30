@@ -14,7 +14,6 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'subject_set', 'subject_name')
-        # fields = '__all__'
 
 
 class RegisterSerializer(serializers.ModelSerializer):
