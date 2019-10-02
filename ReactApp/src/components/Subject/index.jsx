@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import Articles from "./Articles.jsx";
 import ArtPanel from "./ArtPanel.jsx";
 import { getSubject } from "../../actions/subject";
 import DisplayControl from "./DisplayControl.jsx";
@@ -47,7 +48,7 @@ class Subject extends Component {
       subjects.push(
         <div
           key={user.subject_set[i]}
-          className="mr-4 py-1 px-4 text-lg bg-gray-900 text-white cursor-pointer"
+          className="block whitespace-no-wrap mr-4 py-1 px-4 text-lg bg-gray-900 text-white cursor-pointer"
           onClick={() =>
             this.setState({ subject_selected: user.subject_set[i] })
           }
@@ -57,37 +58,6 @@ class Subject extends Component {
       );
     }
     return subjects;
-  }
-
-  loadArts() {
-    let articles = [];
-    this.props.subject.article_set.forEach(art => {
-      articles.push(
-        <div className="border shadow my-4 p-4" key={art.id}>
-          <h2 className="text-3xl py-2">{art.title}</h2>
-          <p className="text-sm text-gray-600">{art.description}</p>
-
-          <div>{this.loadSnnpt(art)}</div>
-        </div>
-      );
-    });
-
-    return articles;
-  }
-
-  loadSnnpt(art) {
-    let snnipets = [];
-
-    art.snnipet_set.forEach(snnipet => {
-      snnipets.push(
-        <div key={snnipet.id}>
-          <h3>{snnipet.title}</h3>
-          <p className="text-justify md:text-left">{snnipet.content}</p>
-        </div>
-      );
-    });
-
-    return snnipets;
   }
 
   render() {
@@ -102,9 +72,7 @@ class Subject extends Component {
 
         {subject.id === undefined ? null : (
           <div className="border-b shadow-lg my-6 text-center">
-            <div className="inline-block md:w-3/4 text-left">
-              {this.loadArts()}
-            </div>
+            <Articles article_set={subject.article_set} />
           </div>
         )}
 
@@ -112,7 +80,7 @@ class Subject extends Component {
           <div className="inline-block shadow-lg my-6 w-1/2 bg-gray-800 text-white">
             <ArtPanel
               panelOn={this.state.articlePanelOn}
-              subject={match.params.id}
+              subject={this.props.subject.id}
             />
             <DisplayControl
               objState={this.state.articlePanelOn}

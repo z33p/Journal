@@ -1,7 +1,5 @@
 import { combineReducers } from "redux";
 import subject from "./subject";
-import articles from "./article";
-import snnipets from "./snnipet";
 import auth from "./auth";
 
 const initialState = {

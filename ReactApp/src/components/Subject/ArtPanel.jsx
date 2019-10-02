@@ -9,7 +9,8 @@ class ArtPanel extends Component {
     this.state = {
       title: "",
       description: "",
-      subject: this.props.subject
+      // TODO: Subject undefined, can't create artigo
+      subject: 0
     };
 
     // Methods
@@ -21,12 +22,18 @@ class ArtPanel extends Component {
     createArticle: PropTypes.func.isRequired
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    const { subject } = this.props.subject;
+    if (prevState.subject !== subject) this.setState({ subject });
+  }
+
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
   onSubmit() {
     const { title, description, subject } = this.state;
+    console.log(subject);
     this.props.createArticle(title, description, subject);
     this.setState({ title: "" });
     this.setState({ description: "" });

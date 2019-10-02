@@ -1,8 +1,10 @@
 import {
   GET_SUBJECT,
   CREATE_SUBJECT,
-  CREATE_ARTICLES,
-  CREATE_SNNIPET
+  CREATE_ARTICLE,
+  PATCH_ARTICLE,
+  CREATE_SNNIPET,
+  PUT_SNNIPET
 } from "../actions/types.js";
 
 export default function(state, action) {
@@ -29,7 +31,7 @@ export default function(state, action) {
         auth
       };
 
-    case CREATE_ARTICLES:
+    case CREATE_ARTICLE:
       return {
         subject: {
           id: state.subject.id,
@@ -41,7 +43,7 @@ export default function(state, action) {
       };
 
     case CREATE_SNNIPET:
-      const loadArticles = (payload, article_set) => {
+      const loadArticles = payload => {
         let articles = [];
         const id = payload.article;
 
@@ -58,6 +60,23 @@ export default function(state, action) {
           id: state.subject.id,
           // when the page is loading it's possible the subject is undefined triggering an error
           article_set: loadArticles(action.payload, state.subject.article_set),
+          title: state.subject.title,
+          created_at: state.subject.created_at
+        },
+        auth: state.auth
+      };
+
+    case PATCH_ARTICLE:
+      let article_set = state.subject.article_set;
+      let i = 0;
+      while (article_set[i].id !== action.payload.id) i++;
+      article_set[i] = action.payload;
+
+      return {
+        auth: state.auth,
+        subject: {
+          id: state.subject.id,
+          article_set: article_set,
           title: state.subject.title,
           created_at: state.subject.created_at
         },
