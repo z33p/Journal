@@ -8,7 +8,12 @@ const initialState = {
     token: localStorage.getItem("token"),
     isAuthenticated: null,
     isLoading: false,
-    user: null
+    user: {
+      id: null,
+      username: null,
+      email: null,
+      subjects: []
+    }
   }
 };
 

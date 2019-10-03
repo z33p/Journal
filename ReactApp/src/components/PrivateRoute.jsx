@@ -2,14 +2,19 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
-function PrivateRoute({ component: Component, auth, ...rest }) {
+function PrivateRoute({
+  component: Component,
+  isLoading,
+  isAuthenticated,
+  ...rest
+}) {
   return (
     <Route
       {...rest}
       render={props => {
-        if (auth.isLoading) {
+        if (isLoading) {
           return <h2>Loading...</h2>;
-        } else if (!auth.isAuthenticated) {
+        } else if (!isAuthenticated) {
           return <Redirect to="/login/" />;
         } else {
           return <Component {...props} />;
@@ -20,7 +25,8 @@ function PrivateRoute({ component: Component, auth, ...rest }) {
 }
 
 const mapStateToProps = state => ({
-  auth: state.reducers.auth
+  isLoading: state.reducers.auth.isLoading,
+  isAuthenticated: state.reducers.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps)(PrivateRoute);

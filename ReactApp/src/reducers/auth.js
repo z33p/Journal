@@ -9,7 +9,7 @@ import {
 
 export default function(state, action) {
   let auth = { ...state.auth };
-
+  let subjects;
   switch (action.type) {
     case USER_LOADING:
       auth.isLoading = true;
@@ -21,7 +21,18 @@ export default function(state, action) {
     case USER_LOADED:
       auth.isLoading = false;
       auth.isAuthenticated = true;
-      auth.user = action.payload;
+      auth.user.id = action.payload.id;
+      auth.user.username = action.payload.username;
+      auth.user.email = action.payload.email;
+
+      subjects = [];
+      for (const i in action.payload.subject_set) {
+        subjects.push({
+          id: action.payload.subject_set[i],
+          title: action.payload.subject_name[i]
+        });
+      }
+      auth.user.subjects = subjects;
 
       return {
         subject: state.subject,
@@ -32,8 +43,18 @@ export default function(state, action) {
       auth.isLoading = false;
       localStorage.setItem("token", action.payload.token);
       auth.isAuthenticated = true;
-      auth.user = action.payload.user;
+      auth.user.id = action.payload.id;
+      auth.user.username = action.payload.username;
+      auth.user.email = action.payload.email;
 
+      subjects = [];
+      for (const i in action.payload.subject_set) {
+        subjects.push({
+          id: action.payload.subject_set[i],
+          title: action.payload.subject_name[i]
+        });
+      }
+      auth.user.subjects = subjects;
       return {
         subject: state.subject,
         auth
@@ -44,7 +65,12 @@ export default function(state, action) {
     case LOGOUT_SUCCESS:
       localStorage.removeItem("token");
       auth.token = null;
-      auth.user = null;
+      auth.user = {
+        id: null,
+        username: null,
+        email: null,
+        subjects: []
+      };
       auth.isAuthenticated = false;
       auth.isLoading = false;
       return {

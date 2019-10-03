@@ -1,6 +1,8 @@
 import {
   GET_SUBJECT,
   CREATE_SUBJECT,
+  UPDATE_SUBJECT,
+  DELETE_SUBJECT,
   CREATE_ARTICLE,
   PATCH_ARTICLE,
   CREATE_SNNIPET,
@@ -18,14 +20,23 @@ export default function(state, action) {
       };
 
     case CREATE_SUBJECT:
-      auth.user.subject_name = [
-        ...state.auth.user.subject_name,
-        action.payload.title
-      ];
-      auth.user.subject_set = [
-        ...state.auth.user.subject_set,
-        action.payload.id
-      ];
+      let subject = {
+        id: action.payload.id,
+        title: action.payload.title
+      };
+      auth.user.subjects = [...auth.user.subjects, subject];
+      return {
+        subject: state.subject,
+        auth
+      };
+
+    case DELETE_SUBJECT:
+      let index = 0;
+      // the payload is just a id of the deleted obj
+      while (action.payload !== auth.user.subjects[index].id) index++;
+      let subjects = [...auth.user.subjects];
+      subjects.splice(index, 1);
+      auth.user.subjects = subjects;
       return {
         subject: state.subject,
         auth

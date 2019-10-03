@@ -8,9 +8,7 @@ class ArtPanel extends Component {
     super(props);
     this.state = {
       title: "",
-      description: "",
-      // TODO: Subject undefined, can't create artigo
-      subject: 0
+      description: ""
     };
 
     // Methods
@@ -22,27 +20,26 @@ class ArtPanel extends Component {
     createArticle: PropTypes.func.isRequired
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    const { subject } = this.props.subject;
-    if (prevState.subject !== subject) this.setState({ subject });
-  }
-
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
   onSubmit() {
-    const { title, description, subject } = this.state;
-    console.log(subject);
-    this.props.createArticle(title, description, subject);
-    this.setState({ title: "" });
-    this.setState({ description: "" });
+    this.props.createArticle(
+      this.state.title,
+      this.state.description,
+      this.props.subject
+    );
+    let state = this.state;
+    state.title = "";
+    state.description = "";
+    this.setState(state);
   }
 
   render() {
     if (!this.props.panelOn) return null;
 
-    const { title, description, subject } = this.state;
+    const { title, description } = this.state;
     return (
       <div className="p-6">
         <h1 className="mb-2 text-3xl font-semibold">Insira o Artigo</h1>

@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Articles from "./Articles.jsx";
 import ArtPanel from "./ArtPanel.jsx";
 import { getSubject } from "../../actions/subject";
+import { deleteSubject } from "../../actions/subject";
 import DisplayControl from "./DisplayControl.jsx";
 import SnnipetPanel from "./SnnipetPanel.jsx";
 import SubjPanel from "./SubjPanel.jsx";
@@ -14,15 +15,16 @@ class Subject extends Component {
     this.state = {
       articlePanelOn: false,
       snnipetPanelOn: false,
-      articles: [],
+      articles: [], // Arr of obj article with name and id
       subject_selected: 0
     };
   }
 
   static propTypes = {
-    user: PropTypes.object.isRequired,
+    subject: PropTypes.object.isRequired,
+    subjects: PropTypes.array.isRequired,
     getSubject: PropTypes.func.isRequired,
-    subject: PropTypes.object.isRequired
+    deleteSubject: PropTypes.func.isRequired
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -31,8 +33,7 @@ class Subject extends Component {
       this.props.getSubject(subject_selected);
 
     if (prevProps.subject !== this.props.subject) {
-      let articles = []; // Arr of obj with name and id
-
+      let articles = [];
       this.props.subject.article_set.forEach(art => {
         articles.push({ id: art.id, title: art.title });
       });
@@ -41,27 +42,38 @@ class Subject extends Component {
   }
 
   loadSubj() {
-    const { user } = this.props;
-
     let subjects = [];
-    for (const i in user.subject_set) {
+    this.props.subjects.forEach(subj => {
       subjects.push(
         <div
-          key={user.subject_set[i]}
-          className="block whitespace-no-wrap mr-4 py-1 px-4 text-lg bg-gray-900 text-white cursor-pointer"
-          onClick={() =>
-            this.setState({ subject_selected: user.subject_set[i] })
-          }
+          key={subj.id}
+          className="block relative mr-4 bg-gray-900 text-white cursor-pointer"
         >
-          {user.subject_name[i]}
+          <span
+            className="whitespace-no-wrap py-2 px-4 text-lg"
+            onClick={() => this.setState({ subject_selected: subj.id })}
+          >
+            {subj.title}
+          </span>
+          <img
+            className="absolute"
+            style={{ top: -5 + "px", right: -5 + "px" }}
+            width={15 + "px"}
+            height={15 + "px"}
+            src="https://image.flaticon.com/icons/svg/148/148766.svg"
+            onClick={() => {
+              if (confirm("Realmente quer deletar este assunto?"))
+                this.props.deleteSubject(subj.id);
+            }}
+          />
         </div>
       );
-    }
+    });
     return subjects;
   }
 
   render() {
-    const { subject, match } = this.props;
+    const { subject } = this.props;
     return (
       <main className="">
         <div className="flex items-center text-center p-6 border-b shadow-lg overflow-x-auto">
@@ -77,23 +89,26 @@ class Subject extends Component {
         )}
 
         <div className="text-center">
-          <div className="inline-block shadow-lg my-6 w-1/2 bg-gray-800 text-white">
-            <ArtPanel
-              panelOn={this.state.articlePanelOn}
-              subject={this.props.subject.id}
-            />
-            <DisplayControl
-              objState={this.state.articlePanelOn}
-              display_on={() => {
-                this.setState({ articlePanelOn: true });
-              }}
-              display_off={() => {
-                this.setState({ articlePanelOn: false });
-              }}
-              msg_on="Clique para inserir artigos"
-            />
-          </div>
+          {this.props.subject.id === undefined ? null : (
+            <div className="inline-block shadow-lg my-6 w-1/2 bg-gray-800 text-white">
+              <ArtPanel
+                panelOn={this.state.articlePanelOn}
+                subject={this.props.subject.id}
+              />
+              <DisplayControl
+                objState={this.state.articlePanelOn}
+                display_on={() => {
+                  this.setState({ articlePanelOn: true });
+                }}
+                display_off={() => {
+                  this.setState({ articlePanelOn: false });
+                }}
+                msg_on="Clique para inserir artigos"
+              />
+            </div>
+          )}
           <br />
+
           <div className="inline-block shadow-lg my-6 w-1/2 bg-gray-800 text-white">
             <SnnipetPanel
               panelOn={this.state.snnipetPanelOn}
@@ -118,12 +133,12 @@ class Subject extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.reducers.auth.user,
-    subject: state.reducers.subject
+    subject: state.reducers.subject,
+    subjects: state.reducers.auth.user.subjects
   };
 };
 
 export default connect(
   mapStateToProps,
-  { getSubject }
+  { getSubject, deleteSubject }
 )(Subject);

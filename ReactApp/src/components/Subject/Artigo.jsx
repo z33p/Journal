@@ -35,7 +35,11 @@ class Artigo extends Component {
   changeMode() {
     if (this.state.insertMode) {
       this.setState({ insertMode: false });
-      this.props.patchArticle(this.state.title, this.state.description);
+      this.props.patchArticle(
+        this.props.art.id,
+        this.state.title,
+        this.state.description
+      );
     } else {
       this.setState({ insertMode: true });
     }
@@ -45,7 +49,7 @@ class Artigo extends Component {
     return (
       <img
         className="float-right m-2 p-1 cursor-pointer"
-        // TODO: Use the img from the current folder
+        // TODO: Use the img from Django static files
         src="https://image.flaticon.com/icons/png/512/2081/2081090.png"
         alt="Edit"
         width={30 + "rem"}
