@@ -1,22 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import Articles from "./Articles.jsx";
-import ArtPanel from "./ArtPanel.jsx";
+import Artigo from "./Artigo/index.jsx";
+import JOptionPanel from "./JOptionPanel/index.jsx";
 import { getSubject } from "../../actions/subject";
 import { deleteSubject } from "../../actions/subject";
-import DisplayControl from "./DisplayControl.jsx";
-import SnnipetPanel from "./SnnipetPanel.jsx";
-import SubjPanel from "./SubjPanel.jsx";
 
 class Subject extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      articlePanelOn: false,
-      snnipetPanelOn: false,
-      articles: [], // Arr of obj article with name and id
-      subject_selected: 0
+      articles: [] // Arr of obj article with name and id
     };
   }
 
@@ -27,11 +21,12 @@ class Subject extends Component {
     deleteSubject: PropTypes.func.isRequired
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    const { subject_selected } = this.state;
-    if (prevState.subject_selected !== subject_selected)
-      this.props.getSubject(subject_selected);
+  componentDidMount() {
+    let first = this.props.subjects[0];
+    if (first !== undefined) this.props.getSubject(first.id);
+  }
 
+  componentDidUpdate(prevProps, prevState) {
     if (prevProps.subject !== this.props.subject) {
       let articles = [];
       this.props.subject.article_set.forEach(art => {
@@ -47,6 +42,7 @@ class Subject extends Component {
       subjects.push(
         <div
           key={subj.id}
+          onClick={() => this.props.getSubject(subj.id)}
           className="block relative mr-4 bg-gray-900 text-white cursor-pointer"
         >
           <span
@@ -72,6 +68,16 @@ class Subject extends Component {
     return subjects;
   }
 
+  loadArts() {
+    let articles = [];
+
+    this.props.subject.article_set.forEach(art => {
+      articles.push(<Artigo key={art.id} art={art} />);
+    });
+
+    return articles;
+  }
+
   render() {
     const { subject } = this.props;
     return (
@@ -80,52 +86,21 @@ class Subject extends Component {
           {this.loadSubj()}
         </div>
 
-        <SubjPanel />
-
         {subject.id === undefined ? null : (
-          <div className="border-b shadow-lg my-6 text-center">
-            <Articles article_set={subject.article_set} />
+          <div className="my-6">
+            <div className="flex text-center">
+              <div className="px-4 inline-block w-3/4 text-left h-screen overflow-y-auto">
+                <div className="text-center">
+                  <h1 className="text-4xl">{this.props.subject.title}</h1>
+                </div>
+                <div className="">{this.loadArts()}</div>
+              </div>
+              <div className="inline-block px-2 w-1/4 h-screen overflow-y-auto border-l text-left">
+                <JOptionPanel />
+              </div>
+            </div>
           </div>
         )}
-
-        <div className="text-center">
-          {this.props.subject.id === undefined ? null : (
-            <div className="inline-block shadow-lg my-6 w-1/2 bg-gray-800 text-white">
-              <ArtPanel
-                panelOn={this.state.articlePanelOn}
-                subject={this.props.subject.id}
-              />
-              <DisplayControl
-                objState={this.state.articlePanelOn}
-                display_on={() => {
-                  this.setState({ articlePanelOn: true });
-                }}
-                display_off={() => {
-                  this.setState({ articlePanelOn: false });
-                }}
-                msg_on="Clique para inserir artigos"
-              />
-            </div>
-          )}
-          <br />
-
-          <div className="inline-block shadow-lg my-6 w-1/2 bg-gray-800 text-white">
-            <SnnipetPanel
-              panelOn={this.state.snnipetPanelOn}
-              articles={this.state.articles}
-            />
-            <DisplayControl
-              objState={this.state.snnipetPanelOn}
-              display_on={() => {
-                this.setState({ snnipetPanelOn: true });
-              }}
-              display_off={() => {
-                this.setState({ snnipetPanelOn: false });
-              }}
-              msg_on="Clique para inserir snnipets"
-            />
-          </div>
-        </div>
       </main>
     );
   }

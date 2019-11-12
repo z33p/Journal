@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { patchArticle } from "../../actions/article";
+import { patchArticle } from "../../../actions/article";
+import Snnipets from "./Snnipets.jsx";
 
 class Artigo extends Component {
   constructor(props) {
@@ -62,10 +63,10 @@ class Artigo extends Component {
   render() {
     const { title, description, insertMode } = this.state;
     return (
-      <article className="relative border shadow my-4 p-4">
+      <article className="relative  my-4 p-4">
         {insertMode ? (
-          <div className="w-full">
-            <div className="border p-2 mb-4">
+          <div className="">
+            <div className="">
               <input
                 value={title}
                 onChange={this.onChange}
@@ -78,12 +79,12 @@ class Artigo extends Component {
               value={description}
               onChange={this.onChange}
               name="description"
-              className="w-full h-48 p-2 text-sm text-gray-600 border border-gray-400"
+              className="w-full h-32 p-1 border text-sm text-gray-600"
             />
           </div>
         ) : (
-          <div className="w-full">
-            <div className="border p-2 mb-4">
+          <div className="mb-6">
+            <div className="">
               <h2 className="inline text-3xl">{title}</h2>
               {this.editImg()}
             </div>
@@ -91,24 +92,12 @@ class Artigo extends Component {
           </div>
         )}
 
-        <div>{this.loadSnnpt(this.props.art)}</div>
+        <Snnipets
+          snnipets={this.props.art.snnipet_set}
+          art_id={this.props.art.id}
+        />
       </article>
     );
-  }
-
-  loadSnnpt(art) {
-    let snnipets = [];
-
-    art.snnipet_set.forEach(snnipet => {
-      snnipets.push(
-        <div key={snnipet.id}>
-          <h3>{snnipet.title}</h3>
-          <p className="text-justify md:text-left">{snnipet.content}</p>
-        </div>
-      );
-    });
-
-    return snnipets;
   }
 }
 

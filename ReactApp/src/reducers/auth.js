@@ -43,15 +43,16 @@ export default function(state, action) {
       auth.isLoading = false;
       localStorage.setItem("token", action.payload.token);
       auth.isAuthenticated = true;
-      auth.user.id = action.payload.id;
-      auth.user.username = action.payload.username;
-      auth.user.email = action.payload.email;
+      auth.token = action.payload.token;
+      auth.user.id = action.payload.user.id;
+      auth.user.username = action.payload.user.username;
+      auth.user.email = action.payload.user.email;
 
       subjects = [];
-      for (const i in action.payload.subject_set) {
+      for (const i in action.payload.user.subject_set) {
         subjects.push({
-          id: action.payload.subject_set[i],
-          title: action.payload.subject_name[i]
+          id: action.payload.user.subject_set[i],
+          title: action.payload.user.subject_name[i]
         });
       }
       auth.user.subjects = subjects;

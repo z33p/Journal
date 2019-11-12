@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { createSubject } from "../../actions/subject";
+import { createSubject } from "../../../actions/subject";
 
 class SubjPanel extends Component {
   constructor(props) {
@@ -31,10 +31,10 @@ class SubjPanel extends Component {
   render() {
     const { subj_title } = this.state;
     return (
-      <div className="text-right mr-6">
-        <div className="inline-block my-4 shadow p-2 bg-gray-900 text-white">
+      <div className="text-center">
+        <div className="inline-block my-4 shadow bg-gray-900 text-white">
           <input
-            className="bg-gray-900 shadow-lg"
+            className="pl-2 py-2 bg-gray-900 shadow-lg"
             type="text"
             name="subj_title"
             id="subj_title"
@@ -44,11 +44,7 @@ class SubjPanel extends Component {
           />
         </div>
 
-        <button
-          className="py-2 px-6 border shadow-lg bg-gray-900 text-white font-semibold"
-          type="submit"
-          onClick={this.onSubmit}
-        >
+        <button className="dark-button" type="submit" onClick={this.onSubmit}>
           Criar
         </button>
       </div>

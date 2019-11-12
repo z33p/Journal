@@ -85,7 +85,8 @@ class About extends Component {
             <p className="p-2 md:mr-8 text-black text-lg md:text-xl text-bold md:text-right">
               <span>Font: </span>
               <a
-                className="text-blue hover:underline"
+                className="hover:underline"
+                style={{ color: "blue" }}
                 href="https://en.wikipedia.org/wiki/Journal"
               >
                 https://en.wikipedia.org/wiki/Journal
